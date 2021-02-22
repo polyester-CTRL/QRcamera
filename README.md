@@ -1,1 +1,1 @@
-# QRcamera
+# barcode-camera
