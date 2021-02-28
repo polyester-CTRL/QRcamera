@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
+import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useState } from 'react';
 import {
   Platform,
   StyleSheet,
@@ -7,17 +7,17 @@ import {
   View,
   TouchableOpacity,
   Button,
-} from "react-native";
-import { Camera } from "expo-camera";
-import { BarCodeScanner } from "expo-barcode-scanner";
-import * as WebBrowser from "expo-web-browser";
+} from 'react-native';
+import { Camera } from 'expo-camera';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import * as WebBrowser from 'expo-web-browser';
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [scanned, setScanned] = useState(false);
 
-  if (Platform.OS === "web") {
+  if (Platform.OS === 'web') {
     if (!Camera.isAvailableAsync()) {
       return <Text>Camera is not available.</Text>;
     }
@@ -26,7 +26,7 @@ export default function App() {
     useEffect(() => {
       (async () => {
         const { status } = await Camera.requestPermissionsAsync();
-        setHasPermission(status === "granted");
+        setHasPermission(status === 'granted');
       })();
     }, []);
 
@@ -58,7 +58,7 @@ export default function App() {
           {scanned && (
             <TouchableOpacity
               style={styles.button}
-              title={"Tap to Scan Again"}
+              title={'Tap to Scan Again'}
               onPress={() => setScanned(false)}
             >
               <Text style={styles.text}> Scan Again </Text>
@@ -86,32 +86,32 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   camera: {
     flex: 1,
   },
   buttonContainer: {
     flex: 1,
-    backgroundColor: "transparent",
-    flexDirection: "row",
+    backgroundColor: 'transparent',
+    flexDirection: 'row',
     margin: 20,
   },
   button: {
     // flex: 0.1,
-    alignSelf: "flex-end",
-    alignItems: "center",
+    alignSelf: 'flex-end',
+    alignItems: 'center',
   },
   text: {
-    color: "white",
+    color: 'white',
     fontSize: 20,
     // marginHorizontal: 15,
     // marginBottom: 10,
   },
   noCamera: {
-    color: "#888",
+    color: '#888',
     fontSize: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  }
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
