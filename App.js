@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Camera } from "expo-camera";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import * as WebBrowser from 'expo-web-browser';
+import * as WebBrowser from "expo-web-browser";
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -39,7 +39,9 @@ export default function App() {
   }
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    let res = WebBrowser.openBrowserAsync(data);
+    setScanned(false);
   };
   return (
     <View style={styles.container}>
@@ -48,9 +50,7 @@ export default function App() {
         type={type}
         barCodeScannerSettings={{
           shouldRenderIndicator: true,
-          // barCodeTypes: [
-          //   'qr', BarCodeScanner.Constants.BarCodeType.pdf417,
-          // ],
+          barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr],
         }}
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
       >
@@ -113,5 +113,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     alignItems: "center",
     justifyContent: "center",
-  },
+  }
 });
