@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "QRcamera",
-    "slug": "QRcamera",
+    "name": "barcode-camera",
+    "slug": "barcode-camera",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
