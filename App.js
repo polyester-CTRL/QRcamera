@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import {
+  Linking,
   Platform,
   StyleSheet,
   Text,
@@ -41,7 +42,9 @@ export default function App() {
     setScanned(true);
     // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     let res = WebBrowser.openBrowserAsync(data);
-    setScanned(false);
+    if (Platform.os !== 'web') {
+      // setScanned(false);
+    }
   };
   return (
     <View style={styles.container}>
@@ -61,21 +64,9 @@ export default function App() {
               title={'Tap to Scan Again'}
               onPress={() => setScanned(false)}
             >
-              <Text style={styles.text}> Scan Again </Text>
+              <Text style={styles.text}> 再スキャンするには画面にタップしてください </Text>
             </TouchableOpacity>
           )}
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
-              );
-            }}
-          >
-            <Text style={styles.text}> Flip </Text>
-          </TouchableOpacity>
         </View>
       </Camera>
       <StatusBar style="auto" />
@@ -93,20 +84,21 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
-    margin: 20,
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   button: {
-    // flex: 0.1,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
     alignSelf: 'flex-end',
     alignItems: 'center',
   },
   text: {
     color: 'white',
     fontSize: 20,
-    // marginHorizontal: 15,
-    // marginBottom: 10,
+    marginHorizontal: 15,
+    marginBottom: 10,
   },
   noCamera: {
     color: '#888',

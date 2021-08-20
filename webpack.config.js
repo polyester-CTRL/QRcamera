@@ -4,7 +4,7 @@ module.exports = async function (env, argv) {
   const config = await createExpoWebpackConfigAsync(
     {
       offline: true,
-      mode: "development",
+      mode: "production",
     },
     argv
   );
